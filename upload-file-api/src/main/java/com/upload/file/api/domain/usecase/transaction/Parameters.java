@@ -10,12 +10,6 @@ import org.springframework.stereotype.Component;
 @StepScope
 public class Parameters {
 
-    @Value("#{jobParameters['filePath']}")
-    private String filePath;
-
     @Value("#{jobParameters['fileUuid']}")
     private String fileUuid;
-
-    @Value("#{jobParameters['fileName']}")
-    private String fileName;
 }

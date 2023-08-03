@@ -35,5 +35,3 @@ create table if not exists transactions (
 	store_owner varchar(255) NULL,
 	store_name varchar(255) NULL
 );
-
-ALTER TABLE transactions ADD CONSTRAINT transactions_pk_all UNIQUE (type_id,"date",value,cpf,card_number,"hour",store_owner,store_name);

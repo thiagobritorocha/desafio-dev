@@ -15,6 +15,8 @@ import org.springframework.batch.item.UnexpectedInputException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import static com.upload.file.api.domain.utils.FileUtils.readContent;
+
 @Component
 @StepScope
 @Slf4j
@@ -31,7 +33,7 @@ public class TransactionRead implements ItemReader<String> {
             throws Exception, UnexpectedInputException, ParseException,
                     NonTransientResourceException {
         if (!processed) {
-            log.info("TransactionsRead - Start read() with filename {} ", parameters.getFileName());
+            log.info("TransactionsRead - Start read() with filename {} ", parameters.getFileUuid());
 
             TransactionFile transactionFile =
                     getTransactionFileByIdAdapterPort.execute(
@@ -39,27 +41,13 @@ public class TransactionRead implements ItemReader<String> {
 
             log.info(
                     "TransactionsRead - Finalized read() with filename {} ",
-                    parameters.getFileName());
+                    parameters.getFileUuid());
 
             processed = true;
 
-            return readFileContent(transactionFile.getFileData());
+            return readContent(transactionFile.getFileData());
         }
         return null;
     }
 
-    private String readFileContent(byte[] file) {
-        BufferedReader br =
-                new BufferedReader(new InputStreamReader(new ByteArrayInputStream(file)));
-        StringBuilder contentBuilder = new StringBuilder();
-        try {
-            String line;
-            while ((line = br.readLine()) != null) {
-                contentBuilder.append(line).append("\n");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return contentBuilder.toString();
-    }
 }

@@ -11,10 +11,10 @@ import org.hibernate.annotations.CreationTimestamp;
 @Table(name = "transaction_files")
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Setter
 @Getter
 public class TransactionFileEntity {
-    public TransactionFileEntity() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

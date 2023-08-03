@@ -33,7 +33,6 @@ public class UploadTransactionFileUseCase implements UploadTransactionFileUseCas
     }
 
     @Override
-    @Transactional
     public TransactionFile execute(TransactionFile transactionFile) {
         TransactionFile transactionFileResult =
                 findTransactionFileAdapterPort.execute(transactionFile.getFileName());
