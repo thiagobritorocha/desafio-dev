@@ -10,7 +10,9 @@ import com.upload.file.api.adapter.outbound.repository.transactionfile.FindTrans
 import com.upload.file.api.domain.entity.TransactionFile;
 import com.upload.file.api.domain.entity.enums.TransactionFileStatus;
 import com.upload.file.api.domain.exception.BusinessException;
+import com.upload.file.api.domain.usecase.transactionfile.UploadTransactionFileUseCase;
 import java.time.LocalDateTime;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,6 +34,7 @@ public class UploadTransactionFileUseCasePortTest {
     public void setUp() {
         this.transactionFile =
                 TransactionFile.builder()
+                        .id(UUID.randomUUID())
                         .fileName("Teste")
                         .transactionFileStatus(TransactionFileStatus.WAITING)
                         .startProcessTime(LocalDateTime.parse("2023-08-30T19:34:50.63"))

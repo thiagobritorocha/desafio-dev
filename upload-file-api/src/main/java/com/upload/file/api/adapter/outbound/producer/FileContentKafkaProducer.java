@@ -12,7 +12,7 @@ public class FileContentKafkaProducer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void sendMessage(String topicName, String fileContent) {
-        this.kafkaTemplate.send(topicName, fileContent);
+    public void sendMessage(String topicName, String fileId) {
+        this.kafkaTemplate.send(topicName, fileId);
     }
 }

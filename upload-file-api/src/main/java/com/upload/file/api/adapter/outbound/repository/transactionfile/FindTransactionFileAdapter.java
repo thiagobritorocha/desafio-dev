@@ -1,24 +1,24 @@
 package com.upload.file.api.adapter.outbound.repository.transactionfile;
 
 import com.upload.file.api.domain.entity.TransactionFile;
-import com.upload.file.api.domain.mapper.TransactionFileMapper;
-import com.upload.file.api.domain.ports.outbound.FindTransactionFileAdapterPort;
+import com.upload.file.api.domain.mapper.transactionfile.TransactionFileMapper;
+import com.upload.file.api.domain.ports.outbound.transactionfile.FindTransactionFileAdapterPort;
 import java.util.Objects;
 import org.springframework.stereotype.Component;
 
 @Component
 public class FindTransactionFileAdapter implements FindTransactionFileAdapterPort {
 
-    private final TransferFileRepository transferFileRepository;
+    private final TransactionFileRepository transactionFileRepository;
 
-    public FindTransactionFileAdapter(TransferFileRepository transferFileRepository) {
-        this.transferFileRepository = transferFileRepository;
+    public FindTransactionFileAdapter(TransactionFileRepository transactionFileRepository) {
+        this.transactionFileRepository = transactionFileRepository;
     }
 
     @Override
     public TransactionFile execute(String name) {
         TransactionFileEntity transactionFileEntityResult =
-                transferFileRepository.findByFileName(name);
+                transactionFileRepository.findByFileName(name);
         if (Objects.isNull(transactionFileEntityResult)) {
             return null;
         }

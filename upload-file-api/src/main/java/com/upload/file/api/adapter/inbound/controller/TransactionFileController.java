@@ -1,8 +1,8 @@
 package com.upload.file.api.adapter.inbound.controller;
 
 import com.upload.file.api.domain.entity.TransactionFile;
-import com.upload.file.api.domain.mapper.TransactionFileMapper;
-import com.upload.file.api.domain.ports.inbound.UploadTransactionFileUseCasePort;
+import com.upload.file.api.domain.mapper.transactionfile.TransactionFileMapper;
+import com.upload.file.api.domain.ports.inbound.transactionfile.UploadTransactionFileUseCasePort;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

@@ -6,8 +6,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.upload.file.api.domain.entity.TransactionFile;
 import com.upload.file.api.domain.entity.enums.TransactionFileStatus;
-import com.upload.file.api.domain.mapper.TransactionFileMapper;
-import com.upload.file.api.domain.usecase.UploadTransactionFileUseCase;
+import com.upload.file.api.domain.mapper.transactionfile.TransactionFileMapper;
+import com.upload.file.api.domain.usecase.transactionfile.UploadTransactionFileUseCase;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.UUID;

@@ -1,14 +1,11 @@
-package com.upload.file.api.domain.usecase;
+package com.upload.file.api.domain.usecase.transactionfile;
 
 import com.upload.file.api.adapter.outbound.producer.FileContentKafkaProducer;
 import com.upload.file.api.domain.entity.TransactionFile;
 import com.upload.file.api.domain.exception.Error;
-import com.upload.file.api.domain.ports.inbound.UploadTransactionFileUseCasePort;
-import com.upload.file.api.domain.ports.outbound.CreateTransactionFileAdapterPort;
-import com.upload.file.api.domain.ports.outbound.FindTransactionFileAdapterPort;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.InputStreamReader;
+import com.upload.file.api.domain.ports.inbound.transactionfile.UploadTransactionFileUseCasePort;
+import com.upload.file.api.domain.ports.outbound.transactionfile.CreateTransactionFileAdapterPort;
+import com.upload.file.api.domain.ports.outbound.transactionfile.FindTransactionFileAdapterPort;
 import java.util.Objects;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Value;
@@ -47,24 +44,8 @@ public class UploadTransactionFileUseCase implements UploadTransactionFileUseCas
         TransactionFile transactionFileSaved =
                 createTransactionFileAdapterPort.execute(transactionFile);
 
-        fileContentKafkaProducer.sendMessage(
-                topicName, readFileContent(transactionFile.getFileData()));
+        fileContentKafkaProducer.sendMessage(topicName, transactionFileSaved.getId().toString());
 
         return transactionFileSaved;
-    }
-
-    private String readFileContent(byte[] file) {
-        BufferedReader br =
-                new BufferedReader(new InputStreamReader(new ByteArrayInputStream(file)));
-        StringBuilder contentBuilder = new StringBuilder();
-        try {
-            String line;
-            while ((line = br.readLine()) != null) {
-                contentBuilder.append(line).append("\n");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return contentBuilder.toString();
     }
 }

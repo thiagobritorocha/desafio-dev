@@ -1,4 +1,4 @@
-package com.upload.file.api.domain.mapper;
+package com.upload.file.api.domain.mapper.transactionfile;
 
 import com.upload.file.api.adapter.outbound.repository.transactionfile.TransactionFileEntity;
 import com.upload.file.api.domain.entity.TransactionFile;

@@ -6,7 +6,7 @@ import static org.mockito.Mockito.when;
 
 import com.upload.file.api.domain.entity.TransactionFile;
 import com.upload.file.api.domain.entity.enums.TransactionFileStatus;
-import com.upload.file.api.domain.mapper.TransactionFileEntityMapper;
+import com.upload.file.api.domain.mapper.transactionfile.TransactionFileEntityMapper;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 public class CreateTransactionFileAdapterTest {
 
-    @Mock private TransferFileRepository transferFileRepository;
+    @Mock private TransactionFileRepository transactionFileRepository;
     @InjectMocks private CreateTransactionFileAdapter createTransactionFileAdapter;
 
     private TransactionFile transactionFile;
@@ -39,7 +39,7 @@ public class CreateTransactionFileAdapterTest {
 
     @Test
     void Should_return_transaction_file_created_with_status_waiting() {
-        when(transferFileRepository.save(any())).thenReturn(transactionFileEntityResult);
+        when(transactionFileRepository.save(any())).thenReturn(transactionFileEntityResult);
         assertEquals(
                 createTransactionFileAdapter.execute(transactionFile).getId(),
                 transactionFileEntityResult.getId());

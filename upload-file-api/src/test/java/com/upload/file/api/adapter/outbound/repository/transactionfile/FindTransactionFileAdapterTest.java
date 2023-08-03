@@ -5,7 +5,7 @@ import static org.mockito.Mockito.when;
 
 import com.upload.file.api.domain.entity.TransactionFile;
 import com.upload.file.api.domain.entity.enums.TransactionFileStatus;
-import com.upload.file.api.domain.mapper.TransactionFileEntityMapper;
+import com.upload.file.api.domain.mapper.transactionfile.TransactionFileEntityMapper;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 public class FindTransactionFileAdapterTest {
-    @Mock private TransferFileRepository transferFileRepository;
+    @Mock private TransactionFileRepository transactionFileRepository;
 
     @InjectMocks private FindTransactionFileAdapter findTransactionFileAdapter;
 
@@ -39,13 +39,14 @@ public class FindTransactionFileAdapterTest {
 
     @Test
     void Should_not_find_transaction_file_by_name() {
-        when(transferFileRepository.findByFileName("CNAB.TXT")).thenReturn(null);
+        when(transactionFileRepository.findByFileName("CNAB.TXT")).thenReturn(null);
         assertEquals(findTransactionFileAdapter.execute("CNAB.TXT"), null);
     }
 
     @Test
     void Should_find_transaction_file_by_name() {
-        when(transferFileRepository.findByFileName("CNAB.TXT")).thenReturn(transactionFileEntity);
+        when(transactionFileRepository.findByFileName("CNAB.TXT"))
+                .thenReturn(transactionFileEntity);
         assertEquals(findTransactionFileAdapter.execute("CNAB.TXT"), transactionFile);
     }
 }

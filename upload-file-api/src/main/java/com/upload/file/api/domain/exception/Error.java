@@ -6,7 +6,9 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum Error {
     DATA_INTEGRITY_VIOLATION("Arquivo com esse nome já existe.", 1000),
-    NOT_EMPTY("Arquivo vazio não permitido.", 1001);
+    NOT_EMPTY("Arquivo vazio não permitido.", 1001),
+    NOT_FOUND("Registro não encontrado"),
+    SANITIZER_FILE("Erro ao limpar o arquivo");
 
     private final String message;
     private final int code;
